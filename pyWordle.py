@@ -1,4 +1,3 @@
-
 import requests
 from rich import print
 from rich.highlighter import Highlighter
