@@ -1,5 +1,7 @@
 
 import requests
+from rich import print
+from rich.highlighter import Highlighter
 
 print("Starting... \n")
 library = requests.get("https://random-word-api.herokuapp.com/word?length=5&number=71081")
@@ -13,22 +15,19 @@ def validWord(user_word):
 
 def isWord(user_word,word,temp_list):
     list = temp_list.copy()
-    for x in user_word:
-        print(x,end="  ")
-    print()
 
     for i in range(len(user_word)):
         if user_word[i] == word[i] and list[user_word[i]] >= 1:
             # letter present in same position green
-            print("🟩",end =" ")
+            print("[on green]"+ user_word[i] +"[/]",end =" ")
             list[user_word[i]] -= 1
         elif user_word[i] in word and list[user_word[i]] >= 1:
             # letter present in word yellow
-                print("🟨",end=" ")
+                print("[on yellow]"+ user_word[i] +"[/]",end=" ")
                 list[user_word[i]] -= 1
         else:
             # letter is not present  or there is no more duplicates black
-            print("⬛",end=" ")
+            print("[bold white on grey23]"+ user_word[i] +"[/]",end=" ")
 
     #if word present return true else return false
     if user_word == word:
@@ -48,7 +47,6 @@ for char in random_word:
         else:
             char_count[char] += 1
 
-print(random_word)
 if (response.status_code != 200):
     print("Sorry, there is an issue with the game. Please try again another time.")
 else:
